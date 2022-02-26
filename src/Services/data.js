@@ -19,6 +19,7 @@ class DataService {
     getCurrentlyPlaying = async(req, res) => {
         const currentlyPlaying = await http.get('/currentlyplaying')
         if(!currentlyPlaying) return console.log("Error getting currently playing at DataService");
+        console.log(currentlyPlaying);
         return currentlyPlaying;
     }
 
