@@ -5,7 +5,19 @@ class TabDataService {
     ugScrapedLinks = async(artist, song, req, res) => {
         const data = await http.get(`/ugscrape/${artist}/${song}`);
         if(!data) return console.log('Error at TabDataService running ugScrapedLinks()');
-        console.log(data.data);
+        return data.data;
+    }
+
+    ugGetTab = async(link, req, res) => {
+        console.log(link);
+        const encodedLink = '&url=' + encodeURIComponent(`${link}`);
+        const data = await http.get(`/ugscrape/tab`, {
+            params: {
+                link: link
+            }
+        }
+        );
+        if(!data) return console.log('Error at TabDataService running ugGetTab()');
         return data.data;
     }
 }

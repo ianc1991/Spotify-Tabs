@@ -1,52 +1,52 @@
+import './tabsView.css'
 import { useEffect, useState } from 'react';
 import tabData from '../../Services/tabData';
-// Icons
-import Icon from '@mdi/react'
-import { mdiStarHalfFull, mdiStar } from '@mdi/js'; 
-import { red } from '@mui/material/colors';
+// MUI
+
+// Components
+import TabPage from '../TabPage/TabPage';
+import TabList from '../TabList/TabList';
 
 const TabsView = (props) => {
 
     const [ugScrapedData, setUgScrapedData] = useState([]);
+    const [activeLink, setActiveLink] = useState("")
 
-    const getUgLinks = async() => {
+    const getUgData = async() => {
         try {
-            console.log(props.song)
             const scrapedData = await tabData.ugScrapedLinks(props.artist, props.song);
+            scrapedData.forEach(item => {
+                let counter = 0;
+                Object.values(item).forEach(value => {
+                   if (value.includes('A5Qyw')) return;
+                   if (value.includes('_3f1mJ')) return counter = counter + .5;
+                   if (value.includes('_1foT2')) return counter = counter + 1;
+                })
+                item.rank = counter;
+            });
             setUgScrapedData(scrapedData);
         } catch(e) {
             console.log('Error at getUgLinks in TabsView: ' + e)
         }
     }
 
-    useEffect(() => {
-      getUgLinks();
-    }, [props.song])
-
-    const getStarRating = () => {
-        
+    const sendLink = (link) => {
+        setActiveLink(link)
     }
 
+    useEffect(() => {
+      getUgData();
+    }, [props.song])
 
   return (
     <div>
-        <h1>WELCOME TO THE WORLD OF TOMORROW</h1>
-        <div>
-            <ul>
-                {
-                    // ugScrapedLinks.map((link)=> 
-                    //     <li key={link}>
-                    //         <Icon 
-                    //             path={mdiStar}
-                    //             size={.8}
-                    //             color={red.A200}
-                    //         />
-                    //         {link}
-                    //     </li>
-                    // )
-                }
-            </ul>
-        </div>
+        <TabList 
+            ugScrapedData={ugScrapedData}
+            sendLink={sendLink}
+        />
+        <TabPage 
+            link={activeLink}
+        />
     </div>
   )
 }

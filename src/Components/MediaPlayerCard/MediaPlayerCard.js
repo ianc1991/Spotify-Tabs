@@ -24,6 +24,7 @@ export default function MediaControlCard() {
   const [songDetails, setSongDetails] = useState({ name: "", artist: "", albumCover: "", imgColorPrimary: "", imgColorSecondary: ""});
   const [isPlaying, setIsPlaying] = useState(false);
 
+  
   const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
     const hex = x.toString(16)
     return hex.length === 1 ? '0' + hex : hex
@@ -76,7 +77,7 @@ export default function MediaControlCard() {
   let backgroundSecondary = songDetails.imgColorSecondary;
   return (
       <div>
-        <Card sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(to right bottom,' + background + ', ' + backgroundSecondary + ')'}}>
+        <Card sx={{ display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(to right bottom,' + background + ', ' + backgroundSecondary + ')'}}>
             <CardMedia
               component="img"
               sx={{ width: 200}}

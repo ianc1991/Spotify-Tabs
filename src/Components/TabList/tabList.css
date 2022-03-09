@@ -1,0 +1,38 @@
+.tabViewContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.tabListUlContainer {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    width: 70%;
+}
+
+.tabListLiContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tabListLiContainer:hover {
+    background-color: bisque;
+}
+
+.tabListTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tabListTitle > h2, .tabListLiContainer > p, .tabListLiContainer > Button {
+    text-align: center;
+    width: 33%;
+    margin: 0;
+}
+
+.starSpan {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
