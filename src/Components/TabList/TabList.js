@@ -5,16 +5,36 @@ import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 // MUI
+import { makeStyles } from "@material-ui/core/styles";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/NativeSelect';
 
+const color = "red";
+const useStyles = makeStyles(() => ({
+  select: {
+    "&:before": {
+      borderColor: color
+    },
+    "&:after": {
+      borderColor: color
+    }
+  },
+  icon: {
+      fill: color,
+  },
+  menuBg: {
+    color: 'black',
+  }
+}));
+
 
 const TabList = (props) => {
+  const classes = useStyles();
 
-  const [tabType, setTabType] = useState();
+  const [tabType, setTabType] = useState("chords");
 
   const handleSetTabType = (e) => {
     setTabType(e.target.value)
@@ -39,46 +59,58 @@ const TabList = (props) => {
     return starData;
   }
 
+
+
   return (
     <div>
-      <div className='tabViewContainer'>
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
-          <InputLabel variant="standard" htmlFor="uncontrolled-native">
-            Tab Type
-          </InputLabel>
-          <Select
-            value={tabType}
-            onChange={handleSetTabType}
-          >
-            <option value={10}>Chords</option>
-            <option value={20}>Tab</option>
-            <option value={30}>Bass</option>
-          </Select>
-        </FormControl>
-      </Box>
-            <ul className='tabListUlContainer'>
-                <div className='tabListTitle'>
-                    <h2>Title</h2>
-                    <h2>Type</h2>
-                </div>
-                { props.ugScrapedData ?
-                    props.ugScrapedData.map((data)=> 
-                        <div>
-                            <li className='tabListLiContainer' key={data.link} >
-                                <Button sx={{ display: 'flex', justifyContent: 'space-between', minWidth: '200px'}} variant="outlined" size="small" onClick={() => props.sendLink(data.link)}>
-                                  {data.name}
-                                  <span className='starSpan'>{starIconRating(data.rank)}</span>
-                                </Button> 
-                                <p>{data.type}</p>
-                            </li>
-                        </div>
-                    )
-                    :
-                    "Nothing found"
-                }
-            </ul>
+      <div className='tabListContainer'>
+        <div className='boxSelectorContainer'>
+          <Box sx={{ minWidth: '120px' }}>
+            <FormControl fullWidth>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native" sx={{color: 'white'}}>
+                Tab Type
+              </InputLabel>
+              <Select
+                value={tabType}
+                onChange={handleSetTabType}
+                className={classes.select}
+                inputProps={{
+                  classes: {
+                      icon: classes.icon,
+                  },
+                }}
+                menuProps={{
+                  classes: {
+                    paper: classes.icon
+                  }
+                }}
+                sx={{ color: 'white', minWidth: '120px' }}
+              >
+                <option value={"chords"}>Chords</option>
+                <option value={"tab"}>Tab</option>
+                <option value={"bass"}>Bass</option>
+              </Select>
+            </FormControl>
+          </Box>
         </div>
+          <ul className='tabListUlContainer'>
+              { props.ugScrapedData ?
+                  props.ugScrapedData.map((data)=> 
+                    tabType === data.type &&
+                      (
+                          <li className='tabListLiContainer' key={data.link} >
+                              <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small" onClick={() => props.sendLink(data.link)}>
+                                {data.name}
+                                <span className='starSpan'>{starIconRating(data.rank)}</span>
+                              </Button>
+                          </li>
+                      )
+                  )
+                  :
+                  "Nothing found"
+              }
+          </ul>
+      </div>
     </div>
   )
 }

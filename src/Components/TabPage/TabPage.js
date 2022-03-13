@@ -18,9 +18,10 @@ const TabPage = (props) => {
       getUgTab();
     }, [props.link])
   return (
-    <div className='tabContainer'>
-      <h1 className='tabTitle'>TabPage</h1>
-      <div dangerouslySetInnerHTML={{__html: tabText}} ></div>
+    <div className='tabOuterContainer'>
+      <div className='tabInnerContainer'>
+        <div dangerouslySetInnerHTML={{__html: tabText}} ></div>
+      </div>
     </div>
     
   )

@@ -77,15 +77,15 @@ export default function MediaControlCard() {
   let backgroundSecondary = songDetails.imgColorSecondary;
   return (
       <div>
-        <Card sx={{ display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(to right bottom,' + background + ', ' + backgroundSecondary + ')'}}>
+        <Card sx={{ height: 140, display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center', position: 'sticky', top: 0, background: 'linear-gradient(to right bottom,' + background + ', ' + backgroundSecondary + ')'}}>
             <CardMedia
               component="img"
-              sx={{ width: 200}}
+              sx={{ maxHeight: 140, width: 'auto'}}
               image={songDetails.albumCover}
               alt="Album cover"
             />
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flex: '1 0 auto' }}>
+            <CardContent sx={{ flex: '1 0 auto', paddingBottom: 0 }}>
               <button onClick={() => getSongDetails()}>Refresh</button>
               <Typography component="div" variant="h5">
                 {songDetails.name}

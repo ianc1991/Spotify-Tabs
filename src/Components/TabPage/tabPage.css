@@ -1,15 +1,52 @@
-.tabContainer {
+.tabInnerContainer > div {
+    all: unset !important;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    color: white !important;
 }
+
+
+
+
 
 .tabTitle {
     text-align: center;
 }
 
+/* Tab Text Container */
+._3F2CP {
+    font-size: 11px !important;
+    width: 100%;
+}
+
+/* Chords */
 ._3PpPJ {
-    letter-spacing: .1rem;
-    color: crimson !important;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* color: rgb(72, 121, 224) !important; */
+    color: #1976d2 !important;
+    text-shadow: 1px white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+}
+
+
+@media only screen and (min-width: 500px)  {
+    ._3F2CP {
+        font-size: unset !important;
+    }
+
+    .tabOuterContainer {
+        /* display: flex;
+        flex-direction: column;
+        align-items: flex-end; */
+        width: 80%;
+        margin-left: 10px;
+    }
+}
+
+@media only screen and (min-width: 1200px)  {
+    .tabOuterContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
 }

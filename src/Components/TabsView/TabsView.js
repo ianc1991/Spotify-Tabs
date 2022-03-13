@@ -39,12 +39,14 @@ const TabsView = (props) => {
     }, [props.song])
 
   return (
-    <div>
-        <TabList 
-            ugScrapedData={ugScrapedData}
-            sendLink={sendLink}
-        />
-        <TabPage 
+    <div className='tabViewContainer'>
+            <div className='tabListContainer'>
+                <TabList
+                    ugScrapedData={ugScrapedData}
+                    sendLink={sendLink}
+                />
+            </div>
+        <TabPage  className='tabPageContainer'
             link={activeLink}
         />
     </div>

@@ -1,34 +1,23 @@
-.tabViewContainer {
+.tabListContainer {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    width: 200px;
 }
 
 .tabListUlContainer {
     display: flex;
     flex-direction: column;
-    gap: .2rem;
-    width: 70%;
+    align-items: center;
+    gap: .8rem;
+    padding: 0;
+    height: 100vh;
 }
 
 .tabListLiContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.tabListLiContainer:hover {
-    background-color: bisque;
-}
-
-.tabListTitle {
-    display: flex;
-    justify-content: space-between;
-}
-
-.tabListTitle > h2, .tabListLiContainer > p, .tabListLiContainer > Button {
-    text-align: center;
-    width: 33%;
-    margin: 0;
 }
 
 .starSpan {

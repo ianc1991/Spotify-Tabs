@@ -1,1 +1,11 @@
+.tabListContainer {
+    position: fixed;
+    top:140px;
+    background-color: black;
+    max-width: 250px;
+}
 
+.tabViewContainer {
+    display: flex;
+    justify-content: flex-start;
+}
