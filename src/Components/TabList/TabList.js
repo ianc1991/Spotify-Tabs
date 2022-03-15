@@ -13,7 +13,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/NativeSelect';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { withThemeCreator } from '@material-ui/styles';
 
 const color = "red";
 const useStyles = makeStyles(() => ({
