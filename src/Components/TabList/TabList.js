@@ -11,6 +11,9 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/NativeSelect';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import { withThemeCreator } from '@material-ui/styles';
 
 const color = "red";
 const useStyles = makeStyles(() => ({
@@ -23,10 +26,10 @@ const useStyles = makeStyles(() => ({
     }
   },
   icon: {
-      fill: color,
+    fill: color,
   },
-  menuBg: {
-    color: 'black',
+  input: {
+    backgroundColor: 'black'
   }
 }));
 
@@ -35,6 +38,7 @@ const TabList = (props) => {
   const classes = useStyles();
 
   const [tabType, setTabType] = useState("chords");
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleSetTabType = (e) => {
     setTabType(e.target.value)
@@ -59,10 +63,19 @@ const TabList = (props) => {
     return starData;
   }
 
-
-
   return (
-    <div>
+    <div className='tabListOuterContainer'>
+      <input id='listCheckbox' type='checkbox' defaultChecked={false} onChange={() => setIsChecked(!isChecked)} />
+      <div className='menuToggleContainer'>
+        <label for="listCheckbox">
+          <span class="menuIcon">
+            <MenuIcon style={{ color: '#1976d2', fontSize: '40px' }}/>
+          </span>
+          <span class="closeIcon">
+            <CloseIcon style={{ color: '#1976d2', fontSize: '40px' }}/>
+          </span>
+        </label>
+      </div>
       <div className='tabListContainer'>
         <div className='boxSelectorContainer'>
           <Box sx={{ minWidth: '120px' }}>
@@ -76,40 +89,35 @@ const TabList = (props) => {
                 className={classes.select}
                 inputProps={{
                   classes: {
-                      icon: classes.icon,
+                      icon: classes.icon
                   },
-                }}
-                menuProps={{
-                  classes: {
-                    paper: classes.icon
-                  }
                 }}
                 sx={{ color: 'white', minWidth: '120px' }}
               >
-                <option value={"chords"}>Chords</option>
-                <option value={"tab"}>Tab</option>
-                <option value={"bass"}>Bass</option>
+                <option value={"chords"} style={{ backgroundColor: 'black' }}>Chords</option>
+                <option value={"tab"} style={{ backgroundColor: 'black' }}>Tab</option>
+                <option value={"bass"} style={{ backgroundColor: 'black' }}>Bass</option>
               </Select>
             </FormControl>
           </Box>
         </div>
-          <ul className='tabListUlContainer'>
-              { props.ugScrapedData ?
-                  props.ugScrapedData.map((data)=> 
-                    tabType === data.type &&
-                      (
-                          <li className='tabListLiContainer' key={data.link} >
-                              <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small" onClick={() => props.sendLink(data.link)}>
-                                {data.name}
-                                <span className='starSpan'>{starIconRating(data.rank)}</span>
-                              </Button>
-                          </li>
-                      )
-                  )
-                  :
-                  "Nothing found"
-              }
-          </ul>
+        <ul className='tabListUlContainer'>
+            { props.ugScrapedData ?
+                props.ugScrapedData.map((data)=> 
+                  tabType === data.type &&
+                    (
+                        <li className='tabListLiContainer' key={data.link} >
+                            <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small" onClick={() => props.sendLink(data.link)}>
+                              {data.name}
+                              <span className='starSpan'>{starIconRating(data.rank)}</span>
+                            </Button>
+                        </li>
+                    )
+                )
+                :
+                "Nothing found"
+            }
+        </ul>
       </div>
     </div>
   )

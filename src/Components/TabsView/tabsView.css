@@ -1,11 +1,17 @@
-.tabListContainer {
-    position: fixed;
-    top:140px;
-    background-color: black;
-    max-width: 250px;
-}
-
 .tabViewContainer {
     display: flex;
     justify-content: flex-start;
+}
+
+.tabListContainerFromTabsView {
+    max-width: 250px;
+    position: fixed;
+    right: 0;
+}
+
+
+@media only screen and (min-width: 1200px)  {
+    .tabListContainerFromTabsView {
+        position: unset;
+    }
 }
