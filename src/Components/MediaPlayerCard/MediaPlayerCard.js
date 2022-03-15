@@ -1,3 +1,4 @@
+import './mediaPlayerCard.css';
 // MUI
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -19,9 +20,7 @@ import TabsView from '../TabsView/TabsView.js';
 export default function MediaControlCard() {
   const navigate = useNavigate();
 
-  
-
-  const [songDetails, setSongDetails] = useState({ name: "", artist: "", albumCover: "", imgColorPrimary: "", imgColorSecondary: ""});
+  const [songDetails, setSongDetails] = useState({ name: "Play a song on Spotify to begin", artist: ":)", albumCover: "https://cdn.usbrandcolors.com/images/logos/spotify-logo.svg", imgColorPrimary: "#1DB954", imgColorSecondary: "#191414"});
   const [isPlaying, setIsPlaying] = useState(false);
 
   
@@ -30,16 +29,8 @@ export default function MediaControlCard() {
     return hex.length === 1 ? '0' + hex : hex
   }).join('');
 
-  if(!songDetails) {
-    checkIfPlaying().then(() => {
-      if(!isPlaying) return (<div>Nothing playing!</div>);
-        //navigate('http://localhost:4000/login');
-    })
-  }
-
   const getSongDetails = async() => {
       try{
-
         let checkPlaying = await data.checkIfSongPlaying();
         if(!checkPlaying.data.is_playing) return console.log('Nothing playing!');
         setIsPlaying(checkPlaying.data.is_playing);
@@ -77,16 +68,26 @@ export default function MediaControlCard() {
   let backgroundSecondary = songDetails.imgColorSecondary;
   return (
       <div>
-        <Card sx={{ height: 140, display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center', position: 'sticky', top: 0, background: 'linear-gradient(to right bottom,' + background + ', ' + backgroundSecondary + ')'}}>
+        <Card sx={{ height: 140, 
+                    display: 'flex', 
+                    textAlign: 'center', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    position: 'sticky', 
+                    top: 0, 
+                    background: 'linear-gradient(to right bottom,' + background + ', ' + backgroundSecondary + ')',
+                    backdropFilter: 'blur(5px)'
+                    }}>
             <CardMedia
               component="img"
               sx={{ maxHeight: 140, width: 'auto'}}
               image={songDetails.albumCover}
               alt="Album cover"
+              onClick={() => getSongDetails()}
             />
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CardContent sx={{ flex: '1 0 auto', paddingBottom: 0 }}>
-              <button onClick={() => getSongDetails()}>Refresh</button>
+              <img className='spotifyLogo' src={require('../../assets/Spotify_Icon_RGB_Green.png')} alt='Spotify Logo' />
               <Typography component="div" variant="h5">
                 {songDetails.name}
               </Typography>
@@ -107,7 +108,7 @@ export default function MediaControlCard() {
             </Box>
           </Box>
         </Card>
-        <div>
+        <>
           {
             songDetails.artist && (
               <TabsView
@@ -116,7 +117,7 @@ export default function MediaControlCard() {
               />
             )
           }
-        </div>
+        </>
       </div>
   );
 }

@@ -66,11 +66,11 @@ const TabList = (props) => {
     <div className='tabListOuterContainer'>
       <input id='listCheckbox' type='checkbox' defaultChecked={false} onChange={() => setIsChecked(!isChecked)} />
       <div className='menuToggleContainer'>
-        <label for="listCheckbox">
-          <span class="menuIcon">
+        <label htmlFor="listCheckbox">
+          <span className="menuIcon">
             <MenuIcon style={{ color: '#1976d2', fontSize: '40px' }}/>
           </span>
-          <span class="closeIcon">
+          <span className="closeIcon">
             <CloseIcon style={{ color: '#1976d2', fontSize: '40px' }}/>
           </span>
         </label>
