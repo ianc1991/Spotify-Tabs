@@ -77,7 +77,10 @@ span.menuIcon {
     }
 
     .menuToggleContainer {
-        display: none;
+        position: fixed;
+        right: unset;
+        left: 0;
+        top: 105px;
     }
 
     .tabListUlContainer,
