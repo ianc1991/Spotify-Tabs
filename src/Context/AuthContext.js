@@ -1,4 +1,3 @@
-import http from '../Services/httpCommon'
 import { createContext, useEffect, useState } from 'react';
 import data from '../Services/data';
 
