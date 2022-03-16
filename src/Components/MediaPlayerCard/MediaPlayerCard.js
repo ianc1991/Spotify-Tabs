@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import CachedIcon from '@mui/icons-material/Cached';
 // React
@@ -36,8 +37,8 @@ export default function MediaControlCard() {
   const getSongDetails = async() => {
       try {
         let checkPlaying = await data.checkIfSongPlaying();
-        if(!checkPlaying.data.is_playing) return console.log('Nothing playing!');
         setIsPlaying(checkPlaying.data.is_playing);
+        if(!checkPlaying.data.is_playing) return console.log('Nothing playing!');
 
         let retrievedDetails = await data.getCurrentlyPlaying();
         setSongDetails({
@@ -102,9 +103,18 @@ export default function MediaControlCard() {
               <IconButton aria-label="previous">
                 <SkipPreviousIcon />
               </IconButton>
-              <IconButton aria-label="play/pause">
-                <PlayArrowIcon sx={{ height: 38, width: 38}} />
-              </IconButton>
+              {isPlaying === false ? (
+                <IconButton aria-label="play">
+                  <PlayArrowIcon sx={{ height: 38, width: 38}} />
+                </IconButton>
+                )
+                :
+                (
+                  <IconButton aria-label="pause">
+                    <PauseIcon sx={{ height: 38, width: 38}} />
+                  </IconButton>
+                )
+              }
               <IconButton onClick={() => getSongDetails()}>
                 <CachedIcon aria-label="refresh"/>
               </IconButton>
