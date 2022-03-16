@@ -9,19 +9,23 @@ import Typography from '@mui/material/Typography';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
+import CachedIcon from '@mui/icons-material/Cached';
 // React
-import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 // Service
 import data from '../../Services/data';
 //Components
 import TabsView from '../TabsView/TabsView.js';
 
 export default function MediaControlCard() {
-  const navigate = useNavigate();
-
-  const [songDetails, setSongDetails] = useState({ name: "Play a song on Spotify to begin", artist: ":)", albumCover: "https://cdn.usbrandcolors.com/images/logos/spotify-logo.svg", imgColorPrimary: "#1DB954", imgColorSecondary: "#191414"});
   const [isPlaying, setIsPlaying] = useState(false);
+  const [songDetails, setSongDetails] = useState({ 
+    name: "Play a song on Spotify to begin", 
+    artist: ":)", 
+    albumCover: "https://cdn.usbrandcolors.com/images/logos/spotify-logo.svg", 
+    imgColorPrimary: "#1DB954", 
+    imgColorSecondary: "#191414"
+  });
 
   
   const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
@@ -30,7 +34,7 @@ export default function MediaControlCard() {
   }).join('');
 
   const getSongDetails = async() => {
-      try{
+      try {
         let checkPlaying = await data.checkIfSongPlaying();
         if(!checkPlaying.data.is_playing) return console.log('Nothing playing!');
         setIsPlaying(checkPlaying.data.is_playing);
@@ -47,22 +51,22 @@ export default function MediaControlCard() {
         //background = rgbToHex(songDetails.imgColor);
       } catch(e) {
           console.error(e);
-      }
+        }
   }
 
-  const checkIfPlaying = async() => {
-    try {
-      let checkPlaying = await data.checkIfSongPlaying();
-      if(!checkPlaying.data.is_playing) return console.log('Nothing playing!');
-      setIsPlaying(checkPlaying.data.is_playing);
-    } catch(e) {
-        console.error("error at checkIfPlaying in MediaPlayerCard: " + e);
-      }
-  }
+  // Check if song has changed
+  // setInterval(checkIfSongChanged, 1000);
+  // const checkIfSongChanged = async() => {
+
+  // }
+
+
+
 
   useEffect(() => {
     getSongDetails();
   }, []);
+
 
   let background = songDetails.imgColorPrimary;
   let backgroundSecondary = songDetails.imgColorSecondary;
@@ -83,7 +87,6 @@ export default function MediaControlCard() {
               sx={{ maxHeight: 140, width: 'auto'}}
               image={songDetails.albumCover}
               alt="Album cover"
-              onClick={() => getSongDetails()}
             />
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CardContent sx={{ flex: '1 0 auto', paddingBottom: 0 }}>
@@ -101,6 +104,9 @@ export default function MediaControlCard() {
               </IconButton>
               <IconButton aria-label="play/pause">
                 <PlayArrowIcon sx={{ height: 38, width: 38}} />
+              </IconButton>
+              <IconButton onClick={() => getSongDetails()}>
+                <CachedIcon aria-label="refresh"/>
               </IconButton>
               <IconButton aria-label="next">
                 <SkipNextIcon />
