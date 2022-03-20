@@ -21,7 +21,7 @@
     padding: 0;
     opacity: 1;
     transition: opacity 150ms ease-in-out 200ms;
-    overflow-y: scroll;
+    overflow-y: auto;
     
 }
 
