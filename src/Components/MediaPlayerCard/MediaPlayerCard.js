@@ -36,8 +36,11 @@ export default function MediaControlCard() {
 
   const getSongDetails = async() => {
       try {
+        // TODO - FIX ME PLS
         let checkPlaying = await data.checkIfSongPlaying();
-        setIsPlaying(checkPlaying.data.is_playing);
+        if (checkPlaying.data.is_playing === undefined) {
+          setIsPlaying(false);
+        } else setIsPlaying(checkPlaying.data.is_playing)
 
         let retrievedDetails = await data.getCurrentlyPlaying();
         setSongDetails({
