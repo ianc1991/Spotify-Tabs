@@ -74,14 +74,15 @@ export default function MediaControlCard() {
     // if paused, resume
     if (onOff) {
       const skip = await data.resumeTrack();
-      if (skip === 'Unauthorized') return console.error('Spotify premium required to use track buttons');
+      if (skip === 'Unauthorized') console.error('Spotify premium required to use track buttons');
+      getSongDetails();
       // if playing, pause
     } else if (!onOff) {
       const skip = await data.pauseTrack();
-      if (skip === 'Unauthorized') return console.error('Spotify premium required to use track buttons');
+      if (skip === 'Unauthorized') console.error('Spotify premium required to use track buttons');
+      getSongDetails();
     }
-    let checkPlaying = await data.checkIfSongPlaying();
-    setIsPlaying(checkPlaying.data.is_playing);
+    
   }
 
 
