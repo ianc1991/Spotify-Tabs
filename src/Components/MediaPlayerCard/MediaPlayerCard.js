@@ -38,7 +38,6 @@ export default function MediaControlCard() {
       try {
         let checkPlaying = await data.checkIfSongPlaying();
         setIsPlaying(checkPlaying.data.is_playing);
-        if(!checkPlaying.data.is_playing) return console.log('Nothing playing!');
 
         let retrievedDetails = await data.getCurrentlyPlaying();
         setSongDetails({
@@ -55,18 +54,35 @@ export default function MediaControlCard() {
         }
   }
 
-  // Check if song has changed
-  // setInterval(checkIfSongChanged, 1000);
-  // const checkIfSongChanged = async() => {
-
-  // }
-
-
-
-
   useEffect(() => {
     getSongDetails();
   }, []);
+
+  const handlePreviousTrack = async() => {
+    const skip = await data.skipToPreviousTrack();
+    if (skip === 'Unauthorized') return alert('Spotify premium required to use track buttons');
+    getSongDetails();
+  }
+
+  const handleNextTrack = async() => {
+    const skip = await data.skipToNextTrack();
+    if (skip === 'Unauthorized') return alert('Spotify premium required to use track buttons');
+    getSongDetails();
+  }
+
+  const handlePauseResume = async(onOff) => {
+    // if paused, resume
+    if (onOff) {
+      const skip = await data.resumeTrack();
+      if (skip === 'Unauthorized') return console.error('Spotify premium required to use track buttons');
+      // if playing, pause
+    } else if (!onOff) {
+      const skip = await data.pauseTrack();
+      if (skip === 'Unauthorized') return console.error('Spotify premium required to use track buttons');
+    }
+    let checkPlaying = await data.checkIfSongPlaying();
+    setIsPlaying(checkPlaying.data.is_playing);
+  }
 
 
   let background = songDetails.imgColorPrimary;
@@ -100,17 +116,17 @@ export default function MediaControlCard() {
               </Typography>
             </CardContent>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', pl: 1, pb: 1 }}>
-              <IconButton aria-label="previous">
+              <IconButton aria-label="previous" onClick={() => handlePreviousTrack()}>
                 <SkipPreviousIcon />
               </IconButton>
               {isPlaying === false ? (
-                <IconButton aria-label="play">
+                <IconButton aria-label="play" onClick={() => handlePauseResume(true)}>
                   <PlayArrowIcon sx={{ height: 38, width: 38}} />
                 </IconButton>
                 )
                 :
                 (
-                  <IconButton aria-label="pause">
+                  <IconButton aria-label="pause" onClick={() => handlePauseResume(false)}>
                     <PauseIcon sx={{ height: 38, width: 38}} />
                   </IconButton>
                 )
@@ -118,7 +134,7 @@ export default function MediaControlCard() {
               <IconButton onClick={() => getSongDetails()}>
                 <CachedIcon aria-label="refresh"/>
               </IconButton>
-              <IconButton aria-label="next">
+              <IconButton aria-label="next" onClick={() => handleNextTrack()}>
                 <SkipNextIcon />
               </IconButton>
             </Box>
