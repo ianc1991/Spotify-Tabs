@@ -11,6 +11,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import CachedIcon from '@mui/icons-material/Cached';
+import ReplayIcon from '@mui/icons-material/Replay';
 // React
 import { useEffect, useState } from 'react';
 // Service
@@ -43,6 +44,7 @@ export default function MediaControlCard() {
         } else setIsPlaying(checkPlaying.data.is_playing)
 
         let retrievedDetails = await data.getCurrentlyPlaying();
+
         setSongDetails({
           name: retrievedDetails.data.currentSong.body.item.name,
           artist: retrievedDetails.data.currentSong.body.item.artists[0].name,
@@ -77,17 +79,27 @@ export default function MediaControlCard() {
     // if paused, resume
     if (onOff) {
       const skip = await data.resumeTrack();
-      if (skip === 'Unauthorized') console.error('Spotify premium required to use track buttons');
+      if (skip === 'Unauthorized') return alert('Spotify premium required to use track buttons');
       getSongDetails();
       // if playing, pause
     } else if (!onOff) {
       const skip = await data.pauseTrack();
-      if (skip === 'Unauthorized') console.error('Spotify premium required to use track buttons');
+      if (skip === 'Unauthorized') return alert('Spotify premium required to use track buttons');
       getSongDetails();
     }
     
   }
 
+  const handleSeekToPosition = async(position) => {
+    const seek = await data.seekToPosition(position);
+    if (seek === 'Unauthorized') return alert('Spotify premium required to use track buttons');
+    getSongDetails();
+  }
+
+  // format the strings to pass as props
+  let artistName = songDetails.artist.replace(/&/g, 'and');
+  let songName = songDetails.name.split('-')[0];
+  console.log(songName);
 
   let background = songDetails.imgColorPrimary;
   let backgroundSecondary = songDetails.imgColorSecondary;
@@ -123,6 +135,9 @@ export default function MediaControlCard() {
               <IconButton aria-label="previous" onClick={() => handlePreviousTrack()}>
                 <SkipPreviousIcon />
               </IconButton>
+              <IconButton aria-label="restart" onClick={() => handleSeekToPosition(0)}>
+                <ReplayIcon />
+              </IconButton>
               {isPlaying === false ? (
                 <IconButton aria-label="play" onClick={() => handlePauseResume(true)}>
                   <PlayArrowIcon sx={{ height: 38, width: 38}} />
@@ -148,8 +163,8 @@ export default function MediaControlCard() {
           {
             songDetails.artist && (
               <TabsView
-                artist = {songDetails.artist}
-                song = {songDetails.name}
+                artist = {artistName}
+                song = {songName}
               />
             )
           }

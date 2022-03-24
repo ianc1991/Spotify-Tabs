@@ -33,7 +33,7 @@ class DataService {
         const nextTrackReq = await http.get('/skiptonext');
         if(!nextTrackReq) return console.error("Error skipping to next at DataService");
         if(nextTrackReq.status === 403) return 'Unauthorized';
-        return nextTrackReq;
+        //return nextTrackReq;
     }
 
     // Skip to previous song
@@ -41,23 +41,30 @@ class DataService {
         const prevTrackReq = await http.get('/skiptoprevious');
         if(!prevTrackReq) return console.error("Error skipping to previous at DataService");
         if(prevTrackReq.status === 403) return 'Unauthorized';
-        return prevTrackReq;
+        //return prevTrackReq;
     }
 
     // Play/resume song
     resumeTrack = async() => {
         const trackReq = await http.get('/resumeplayback');
         if(!trackReq) return console.error("Error pausing/resuming at DataService");
-        if(trackReq === 403) return 'Unauthorized';
-        return trackReq;
+        if(trackReq.status === 403) return 'Unauthorized';
+        //return trackReq;
     }
 
     // Pause song
     pauseTrack = async() => {
         const trackReq = await http.get('/pauseplayback');
         if(!trackReq) return console.error("Error pausing at DataService");
-        if(trackReq === 403) return 'Unauthorized';
-        return trackReq;
+        if(trackReq.status === 403) return 'Unauthorized';
+        //return trackReq;
+    }
+
+    // Seek to position
+    seekToPosition = async(position) => {
+        const seekReq = await http.get(`seektoposition/${position}`)
+        if(!seekReq) return console.error("Error seeking at DataService");
+        if(seekReq.status === 403) return 'Unauthorized';
     }
 }
 
