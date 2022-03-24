@@ -40,12 +40,12 @@ const TabsView = (props) => {
 
   return (
     <div className='tabViewContainer'>
-            <div className='tabListContainerFromTabsView'>
-                <TabList
-                    ugScrapedData={ugScrapedData}
-                    sendLink={sendLink}
-                />
-            </div>
+        <div className='tabListContainerFromTabsView'>
+            <TabList
+                ugScrapedData={ugScrapedData}
+                sendLink={sendLink}
+            />
+        </div>
         <TabPage  className='tabPageContainer'
             link={activeLink}
         />

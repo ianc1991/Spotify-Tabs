@@ -5,6 +5,14 @@
     color: white !important;
 }
 
+.tabOuterContainer {
+    margin-left: 5px;
+}
+
+section._3cXAr {
+    overflow-x: auto !important;
+}
+
 .tabTitle {
     text-align: center;
 }
@@ -33,8 +41,8 @@
         /* display: flex;
         flex-direction: column;
         align-items: flex-end; */
-        width: 80%;
         margin-left: 10px;
+        width: 100%;
     }
 }
 
@@ -44,5 +52,6 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
+        margin-left: 0;
     }
 }

@@ -99,7 +99,7 @@ export default function MediaControlCard() {
   // format the strings to pass as props
   let artistName = songDetails.artist.replace(/&/g, 'and');
   let songName = songDetails.name.split('-')[0];
-  console.log(songName);
+  console.log(songName + " " + artistName);
 
   let background = songDetails.imgColorPrimary;
   let backgroundSecondary = songDetails.imgColorSecondary;

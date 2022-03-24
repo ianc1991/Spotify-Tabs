@@ -13,6 +13,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/NativeSelect';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+// Components
+import { Loading } from '../Loading/Loading';
 
 const color = "red";
 const useStyles = makeStyles(() => ({
@@ -38,6 +40,7 @@ const TabList = (props) => {
 
   const [tabType, setTabType] = useState("chords");
   const [isChecked, setIsChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);   
 
   const handleSetTabType = (e) => {
     setTabType(e.target.value)
@@ -101,21 +104,25 @@ const TabList = (props) => {
           </Box>
         </div>
         <ul className='tabListUlContainer'>
-            { props.ugScrapedData ?
-                props.ugScrapedData.map((data)=> 
-                  tabType === data.type &&
-                    (
-                        <li className='tabListLiContainer' key={data.link} >
-                            <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small" onClick={() => props.sendLink(data.link)}>
-                              {data.name}
-                              <span className='starSpan'>{starIconRating(data.rank)}</span>
-                            </Button>
-                        </li>
-                    )
-                )
-                :
-                "Nothing found"
-            }
+          {isLoading && 
+          (
+            <Loading />
+          )}
+          { props.ugScrapedData ?
+              props.ugScrapedData.map((data)=> 
+                tabType === data.type &&
+                  (
+                      <li className='tabListLiContainer' key={data.link} >
+                          <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small" onClick={() => props.sendLink(data.link)}>
+                            {data.name}
+                            <span className='starSpan'>{starIconRating(data.rank)}</span>
+                          </Button>
+                      </li>
+                  )
+              )
+              :
+              "Nothing found"
+          }
         </ul>
       </div>
     </div>
