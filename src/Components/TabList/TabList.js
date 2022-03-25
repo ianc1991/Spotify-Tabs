@@ -109,7 +109,7 @@ const TabList = (props) => {
         <ul className='tabListUlContainer'>
           {props.isLoading && 
           (
-            <div class="loadingTabList">
+            <div className="loadingTabList">
               <Loading />
             </div>
           )}

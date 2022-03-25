@@ -11,6 +11,7 @@
     right: 0;
     top: 140px;
     bottom: 0;
+    z-index: 999;
 }
 
 .tabListUlContainer {
@@ -22,6 +23,7 @@
     opacity: 1;
     transition: opacity 150ms ease-in-out 200ms;
     overflow-y: auto;
+    height: 100vh;
 }
 
 .tabListLiContainer {
@@ -74,6 +76,7 @@ span.menuIcon {
 }
 
 .loadingTabList {
+    overflow: visible;
     color: white;
 }
 

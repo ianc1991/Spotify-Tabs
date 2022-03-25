@@ -1,0 +1,43 @@
+:root {
+    --animationLength: 10px
+}
+
+.noteLeft, .noteRight {
+    overflow: visible;
+}
+
+.noteLeft {
+    animation: uptodown 1s infinite;
+}
+
+.noteRight {
+    animation: downtoup 1s infinite;
+}
+
+@keyframes uptodown {
+    0% {
+        transform: translateY(-(var(--animationLength)));
+    }
+
+    50% {
+        transform: translateY(var(--animationLength));
+    }
+
+    100% {
+        transform: translateY(-(var(--animationLength)));
+    }
+}
+
+@keyframes downtoup {
+    0% {
+        transform: translateY(var(--animationLength));
+    }
+
+    50% {
+        transform: translateY(-(var(--animationLength)));
+    }
+
+    100% {
+        transform: translateY(var(--animationLength));
+    }
+}
