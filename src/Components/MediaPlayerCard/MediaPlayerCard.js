@@ -25,7 +25,7 @@ export default function MediaControlCard() {
   const [loggedIn, setLoggedIn] = useState(undefined);
   const [songDetails, setSongDetails] = useState({ 
     name: "Play a song on Spotify to begin", 
-    artist: ":)", 
+    artist: "Click the refresh button to sync with Spotify", 
     albumCover: "https://cdn.usbrandcolors.com/images/logos/spotify-logo.svg", 
     imgColorPrimary: "#1DB954", 
     imgColorSecondary: "#191414"
