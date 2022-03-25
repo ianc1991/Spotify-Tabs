@@ -11,7 +11,7 @@ class DataService {
     getUserData = async() => {
         const userData = await http.get('/userdata');
         if (!userData) return console.error("Error getting user data at DataService");
-        console.log(userData);
+        return userData;
     }
 
     // Currently playing + data and color scheme

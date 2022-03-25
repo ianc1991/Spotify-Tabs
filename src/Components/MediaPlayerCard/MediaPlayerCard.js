@@ -18,9 +18,11 @@ import { useEffect, useState } from 'react';
 import data from '../../Services/data';
 //Components
 import TabsView from '../TabsView/TabsView.js';
+import Login from '../../Components/Login/Login';
 
 export default function MediaControlCard() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(undefined);
   const [songDetails, setSongDetails] = useState({ 
     name: "Play a song on Spotify to begin", 
     artist: ":)", 
@@ -30,6 +32,14 @@ export default function MediaControlCard() {
   });
 
   
+
+  const checkLogin = async() => {
+    const userData = await data.getUserData();
+    console.log(userData);
+    if (userData.data.status === 401) setLoggedIn(false);
+    if (userData.data.statusCode === 200) setLoggedIn(true);
+  }
+  
   const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
     const hex = x.toString(16)
     return hex.length === 1 ? '0' + hex : hex
@@ -37,7 +47,6 @@ export default function MediaControlCard() {
 
   const getSongDetails = async() => {
       try {
-        // TODO - FIX ME PLS
         let checkPlaying = await data.checkIfSongPlaying();
         if (checkPlaying.data.is_playing === undefined) {
           setIsPlaying(false);
@@ -52,16 +61,10 @@ export default function MediaControlCard() {
           imgColorPrimary: rgbToHex(retrievedDetails.data.imgFinalBoss[0][0], retrievedDetails.data.imgFinalBoss[0][1], retrievedDetails.data.imgFinalBoss[0][2]),
           imgColorSecondary: rgbToHex(retrievedDetails.data.imgFinalBoss[1][0], retrievedDetails.data.imgFinalBoss[1][1], retrievedDetails.data.imgFinalBoss[1][2])
         });
-        //console.log(retrievedDetails.data.item);
-        //background = rgbToHex(songDetails.imgColor);
       } catch(e) {
           console.error(e);
         }
   }
-
-  useEffect(() => {
-    getSongDetails();
-  }, []);
 
   const handlePreviousTrack = async() => {
     const skip = await data.skipToPreviousTrack();
@@ -87,7 +90,6 @@ export default function MediaControlCard() {
       if (skip === 'Unauthorized') return alert('Spotify premium required to use track buttons');
       getSongDetails();
     }
-    
   }
 
   const handleSeekToPosition = async(position) => {
@@ -96,6 +98,11 @@ export default function MediaControlCard() {
     getSongDetails();
   }
 
+  useEffect(() => {
+    getSongDetails();
+    checkLogin();
+  }, []);
+
   // format the strings to pass as props
   let artistName = songDetails.artist.replace(/&/g, 'and');
   let songName = songDetails.name.split('-')[0];
@@ -103,7 +110,19 @@ export default function MediaControlCard() {
 
   let background = songDetails.imgColorPrimary;
   let backgroundSecondary = songDetails.imgColorSecondary;
-  return (
+
+  if (loggedIn === undefined) return (
+    <div>
+      Checking login...
+    </div>
+  )
+
+  if (loggedIn === false) return (
+    <div>
+      <Login />
+    </div>
+  )
+  if (loggedIn === true) return (
       <div>
         <Card sx={{ height: 140, 
                     display: 'flex', 
