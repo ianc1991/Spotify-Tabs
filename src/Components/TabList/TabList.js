@@ -16,6 +16,7 @@ import CloseIcon from '@mui/icons-material/Close';
 // Components
 import { Loading } from '../Loading/Loading';
 
+
 const color = "red";
 const useStyles = makeStyles(() => ({
   select: {
@@ -37,6 +38,8 @@ const useStyles = makeStyles(() => ({
 
 const TabList = (props) => {
   const classes = useStyles();
+
+  console.log(props.ugScrapedData);
 
   const [tabType, setTabType] = useState("chords");
   const [isChecked, setIsChecked] = useState(false);
@@ -104,15 +107,17 @@ const TabList = (props) => {
           </Box>
         </div>
         <ul className='tabListUlContainer'>
-          {/* {isLoading && 
+          {props.isLoading && 
           (
-            <Loading />
-          )} */}
-          { props.ugScrapedData ?
+            <div class="loadingTabList">
+              <Loading />
+            </div>
+          )}
+          { props.ugScrapedData.length > 0 ?
               props.ugScrapedData.map((data)=> 
                 tabType === data.type &&
                   (
-                      <li className='tabListLiContainer' key={data.link} >
+                      <li className='tabListLiContainer' key={data.link}>
                           <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small" onClick={() => props.sendLink(data.link)}>
                             {data.name}
                             <span className='starSpan'>{starIconRating(data.rank)}</span>
@@ -121,7 +126,12 @@ const TabList = (props) => {
                   )
               )
               :
-              "Nothing found"
+              !props.isLoading &&
+              <div>
+                <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small">
+                  Nothing here
+                </Button>
+              </div>
           }
         </ul>
       </div>

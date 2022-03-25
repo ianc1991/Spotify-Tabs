@@ -6,14 +6,18 @@ import tabData from '../../Services/tabData';
 // Components
 import TabPage from '../TabPage/TabPage';
 import TabList from '../TabList/TabList';
+import { Loading } from '../Loading/Loading';
 
 const TabsView = (props) => {
 
     const [ugScrapedData, setUgScrapedData] = useState([]);
     const [activeLink, setActiveLink] = useState("")
+    const [isLoading, setIsLoading] = useState(false);
 
     const getUgData = async() => {
         try {
+            setIsLoading(true);
+            setUgScrapedData([]);
             const scrapedData = await tabData.ugScrapedLinks(props.artist, props.song);
             scrapedData.forEach(item => {
                 let counter = 0;
@@ -28,6 +32,7 @@ const TabsView = (props) => {
         } catch(e) {
             console.log('Error at getUgLinks in TabsView: ' + e)
         }
+        setIsLoading(false);
     }
 
     const sendLink = (link) => {
@@ -44,6 +49,7 @@ const TabsView = (props) => {
             <TabList
                 ugScrapedData={ugScrapedData}
                 sendLink={sendLink}
+                isLoading={isLoading}
             />
         </div>
         <TabPage  className='tabPageContainer'
