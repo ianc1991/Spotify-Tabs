@@ -7,12 +7,12 @@ class DataService {
         if(!getLogin) return console.error("Error getting spotify login at DataService");
     }
 
-    // Check login
-    // checkSpotifyLogin = async(req, res) => {
-    //     const checkLogin = await http.get('/checkloggedin');
-    //     if(!checkLogin) return false;
-    //     return true;
-    // }
+    // Get user data / Check login
+    getUserData = async() => {
+        const userData = await http.get('/userdata');
+        if (!userData) return console.error("Error getting user data at DataService");
+        console.log(userData);
+    }
 
     // Currently playing + data and color scheme
     getCurrentlyPlaying = async() => {
