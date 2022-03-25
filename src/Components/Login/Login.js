@@ -1,22 +1,17 @@
-import authContext from '../../Context/AuthContext';
-import { useContext, useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import './login.css'
+// MUI
+import Button from '@mui/material/Button';
 
 const Login = () => {
 
-  // Reads value from AuthContext to check if user is logged in
-  //const {loggedIn} = useContext(authContext);
-
   return (
-    <div>
-        <div>
-            <div>
-              <div id="login">
-                <h1>First, log in to spotify</h1>
-                <a href='http://localhost:4000/login'>Log in</a>
-              </div>
-            </div>
-        </div>
+    <div className='loginContainer'>
+      <h1>Welcome to <span className="loginTitle">Tabify!</span></h1>
+      <h3>View Ultimate Guitar tabs based on your currently playing song in Spotify</h3>
+        <a href='http://localhost:4000/login' className='loginLink'>Click here</a>
+        <p> to log into Spotify and begin. Make Jimi proud!</p>
+        <br></br>
+        <p>The above link will open Spotify's own login service. Your Spotify password is never seen by this app. Only details that are made visible through the Spotify API are used.</p>
     </div>
   )
     
