@@ -1,40 +1,46 @@
 import './tabPage.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import tabData from '../../Services/tabData';
 //Componenets
 import { Loading } from '../Loading/Loading';
 
 const TabPage = (props) => {
     const [tabText, setTabText] = useState("");
-    const [isLoading, setIsLoading] = useState(false);   
+    const [isLoadingTab, setIsLoadingTab] = useState(false);
+
+    const isInitialMount = useRef(true);
 
     const getUgTab = async() => {
-      setIsLoading(true);
-        try {
-            const tab = await tabData.ugGetTab(props.link);
-            setTabText(tab);
-        } catch(e) {
-            console.log('Error at getUgTab in TabPage: ' + e)
-        }
-        setIsLoading(false);
+      try {
+        setIsLoadingTab(true);
+        const tab = await tabData.ugGetTab(props.link);
+        setTabText(tab);
+      } catch(e) {
+          console.log('Error at getUgTab in TabPage: ' + e)
+      }
+      setIsLoadingTab(false);
     }
     
     useEffect(() => {
-      getUgTab();
+      if (isInitialMount.current) {
+        isInitialMount.current = false;
+      } else {
+        getUgTab();
+      }
     }, [props.link])
-
-  if (isLoading) return (
-    <div className='tabOuterContainer'>
-      <div className='tabInnerContainer'>
-        <Loading />
-      </div>
-    </div>
-  )
 
   return (
     <div className='tabOuterContainer'>
       <div className='tabInnerContainer'>
-        <div dangerouslySetInnerHTML={{__html: tabText}} ></div>
+        {isLoadingTab ? 
+        (
+          <Loading />
+        )
+        :
+        (
+          <div className='tabTextInnerHTML' dangerouslySetInnerHTML={{__html: tabText}} ></div>
+        )
+        }
       </div>
     </div>
     

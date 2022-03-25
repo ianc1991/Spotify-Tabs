@@ -3,7 +3,18 @@
     display: flex;
     justify-content: center;
     color: white !important;
+    
 }
+
+@keyframes fadeIn {
+    0% {opacity:0};
+    100% {opacity:1};
+  }
+
+  @-moz-keyframes fadeIn {
+    0% {opacity:0};
+    100% {opacity:1};
+  }
 
 .tabOuterContainer {
     margin-left: 5px;
@@ -11,6 +22,7 @@
 
 section._3cXAr {
     overflow-x: auto !important;
+    animation: fadeIn .5s ease-in;
 }
 
 .tabTitle {
