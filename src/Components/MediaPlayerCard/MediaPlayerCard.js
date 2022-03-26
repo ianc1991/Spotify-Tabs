@@ -19,6 +19,7 @@ import data from '../../Services/data';
 //Components
 import TabsView from '../TabsView/TabsView.js';
 import Login from '../../Components/Login/Login';
+import { Loading } from '../Loading/Loading';
 
 export default function MediaControlCard() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -112,8 +113,8 @@ export default function MediaControlCard() {
   let backgroundSecondary = songDetails.imgColorSecondary;
 
   if (loggedIn === undefined) return (
-    <div>
-      Checking login...
+    <div className='undefinedLoading'>
+      <Loading />
     </div>
   )
 
