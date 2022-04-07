@@ -39,8 +39,6 @@ const useStyles = makeStyles(() => ({
 const TabList = (props) => {
   const classes = useStyles();
 
-  console.log(props.ugScrapedData);
-
   const [tabType, setTabType] = useState("chords");
   const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);   

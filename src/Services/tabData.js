@@ -9,8 +9,6 @@ class TabDataService {
     }
 
     ugGetTab = async(link, req, res) => {
-        console.log(link);
-        const encodedLink = '&url=' + encodeURIComponent(`${link}`);
         const data = await http.get(`/ugscrape/tab`, {
             params: {
                 link: link

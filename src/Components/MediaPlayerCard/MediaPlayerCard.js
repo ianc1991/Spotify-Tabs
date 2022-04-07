@@ -36,7 +36,6 @@ export default function MediaControlCard() {
 
   const checkLogin = async() => {
     const userData = await data.getUserData();
-    console.log(userData);
     if (userData.data.status === 401) setLoggedIn(false);
     if (userData.data.statusCode === 200) setLoggedIn(true);
   }
@@ -107,7 +106,6 @@ export default function MediaControlCard() {
   // format the strings to pass as props
   let artistName = songDetails.artist.replace(/&/g, 'and');
   let songName = songDetails.name.split('-')[0];
-  console.log(songName + " " + artistName);
 
   let background = songDetails.imgColorPrimary;
   let backgroundSecondary = songDetails.imgColorSecondary;
