@@ -8,6 +8,7 @@ import { BrowserRouter, HashRouter } from "react-router-dom";
 ReactDOM.render(
   <HashRouter
     hashType="slash"
+    basename="/"
   >
     <App />
   </HashRouter>,

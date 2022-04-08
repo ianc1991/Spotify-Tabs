@@ -8,7 +8,7 @@ const Router = () => {
     return (
         <div>
           <Routes>
-            <Route path="/#/savelogin/" element={<SaveTheLogin />} />
+            <Route path="/savelogin/" element={<SaveTheLogin />} />
             <Route path="" element={<MediaControlCard />} />
           </Routes>
         </div>
