@@ -32,8 +32,6 @@ export default function MediaControlCard() {
     imgColorSecondary: "#191414"
   });
 
-  
-
   const checkLogin = async() => {
     const userData = await data.getUserData();
     if (userData.data.status === 401) setLoggedIn(false);
@@ -99,8 +97,8 @@ export default function MediaControlCard() {
   }
 
   useEffect(() => {
-    getSongDetails();
     checkLogin();
+    getSongDetails();
   }, []);
 
   // format the strings to pass as props

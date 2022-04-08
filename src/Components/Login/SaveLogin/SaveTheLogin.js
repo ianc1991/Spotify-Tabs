@@ -19,7 +19,9 @@ const SaveTheLogin = () => {
     const saveLoginToLocalStorage = async() => {
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
-        navigate('/');
+        // REPLACE ME BEFORE DEPLOY
+        //window.location.replace('http://localhost:3000/');
+        window.location.replace('https://spotify-guitar-tabs.web.app/');
     }
 
 
