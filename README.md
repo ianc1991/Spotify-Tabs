@@ -12,3 +12,9 @@ This is the front end of my (working title) Tabify app. The front end is hosted 
 * React
 * Material UI
 * Axios for calling back end server API
+
+Known issues:
+* Users who log in to Spotify through Facebook may not be able to gain access
+* No alert for non-premium users attempting to use Spotify controls
+* Several mobile issues to be addressed
+* The first song that loads data will show 'Nothing here' for guitar tabs for a brief moment before showing the actual tabs
