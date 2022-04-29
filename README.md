@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# Tabify
+![image](https://user-images.githubusercontent.com/62260491/165644002-8b5d6b09-ea50-44bc-a6de-fc57265275ff.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+This is the front end of my (working title) Tabify app. The front end is hosted on Firebase, while the back end is deployed through Heroku. Load times may be somewhat slow due to using the free tier of Heroku.
 
-In the project directory, you can run:
+SPOTIFY DOES NOT ALLOW QUOTA EXTENSIONS / PUBLIC ACCESS FOR HOBBY PROJECTS. PLEASE MESSAGE ME YOUR EMAIL ADDRESS IF YOU WOULD LIKE TO TRY THE APP.
 
-### `yarn start`
+## Back end
+* NodeJS Express server
+* Spotify API for handling authorization and playing soundtracks. Spotify controls can also be used for Premium users only.
+* Puppeteer for web crawling Ultimate Guitar and supplying guitar tabs + ratings.
+* Color Thief is used to determine dominant colors of current track's album artwork and is used on the front end media player card as a gradient.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Front end
+* React
+* Material UI
+* Axios for calling back end server API
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Known issues:
+* No alert for non-premium users attempting to use Spotify controls
+* Several mobile issues to be addressed
+* The first song that loads data will show 'Nothing here' for guitar tabs for a brief moment before showing the actual tabs
