@@ -32,6 +32,14 @@
     align-items: center;
 }
 
+.defaultListLiContainer {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .starSpan {
     display: flex;
     align-items: center;

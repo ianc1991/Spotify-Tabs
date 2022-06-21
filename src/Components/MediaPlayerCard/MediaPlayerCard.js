@@ -23,7 +23,6 @@ import { Loading } from '../Loading/Loading';
 
 export default function MediaControlCard() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(undefined);
   const [songDetails, setSongDetails] = useState({ 
     name: "Play a song on Spotify to begin", 
     artist: "Click the refresh button to sync with Spotify", 
@@ -32,10 +31,34 @@ export default function MediaControlCard() {
     imgColorSecondary: "#191414"
   });
 
-  const checkLogin = async() => {
-    const userData = await data.getUserData();
-    if (userData.data.status === 401) setLoggedIn(false);
-    if (userData.data.statusCode === 200) setLoggedIn(true);
+  const sendDemoSongDetails = (song) => {
+    if (song === 'RHCP') {
+      setSongDetails({
+        name: "Under The Bridge",
+        artist: "Red Hot Chili Peppers",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/4/41/UndertheBridge.jpg",
+        imgColorPrimary: "#f0f0f0", 
+        imgColorSecondary: "#110e0f"
+      })
+    }
+    if (song === 'radiohead') {
+      setSongDetails({
+        name: "Black Star",
+        artist: "Radiohead",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/thumb/5/55/Radioheadthebends.png/220px-Radioheadthebends.png",
+        imgColorPrimary: "#030201", 
+        imgColorSecondary: "#f6c7a0"
+      })
+    }
+    if (song === 'beatles') {
+      setSongDetails({
+        name: "Yesterday",
+        artist: "Beatles",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/thumb/e/e7/Help%21_%28The_Beatles_album_-_cover_art%29.jpg/220px-Help%21_%28The_Beatles_album_-_cover_art%29.jpg",
+        imgColorPrimary: "#fefefe", 
+        imgColorSecondary: "#083f6b"
+      })
+    }
   }
   
   const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
@@ -97,7 +120,6 @@ export default function MediaControlCard() {
   }
 
   useEffect(() => {
-    checkLogin();
     getSongDetails();
   }, []);
 
@@ -108,18 +130,7 @@ export default function MediaControlCard() {
   let background = songDetails.imgColorPrimary;
   let backgroundSecondary = songDetails.imgColorSecondary;
 
-  if (loggedIn === undefined) return (
-    <div className='undefinedLoading'>
-      <Loading />
-    </div>
-  )
-
-  if (loggedIn === false) return (
-    <div>
-      <Login />
-    </div>
-  )
-  if (loggedIn === true) return (
+  return (
       <div>
         <Card sx={{ height: 140, 
                     display: 'flex', 
@@ -181,6 +192,7 @@ export default function MediaControlCard() {
               <TabsView
                 artist = {artistName}
                 song = {songName}
+                sendDemoSongDetails = {sendDemoSongDetails}
               />
             )
           }

@@ -125,9 +125,21 @@ const TabList = (props) => {
               )
               :
               !props.isLoading &&
-              <div>
+              <div className='defaultListLiContainer'>
                 <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small">
-                  Nothing here
+                  No results. Try some default tabs below!
+                </Button>
+                <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small" onClick={() => props.sendLink(`https://tabs.ultimate-guitar.com/tab/red-hot-chili-peppers/under-the-bridge-chords-703476`, 'RHCP')}>
+                  Red Hot Chili Peppers - Under The Bridge
+                  <span className='starSpan'>{starIconRating(5)}</span>
+                </Button>
+                <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small" onClick={() => props.sendLink(`https://tabs.ultimate-guitar.com/tab/radiohead/black-star-chords-102857`, 'radiohead')}>
+                  Radiohead - Black Star
+                  <span className='starSpan'>{starIconRating(5)}</span>
+                </Button>
+                <Button sx={{ display: 'flex', flexDirection: 'column', width: 150, padding: 0  }} variant="outlined" size="small" onClick={() => props.sendLink(`https://tabs.ultimate-guitar.com/tab/the-beatles/yesterday-chords-887610`, 'beatles')}>
+                  The Beatles - Yesterday
+                  <span className='starSpan'>{starIconRating(5)}</span>
                 </Button>
               </div>
           }

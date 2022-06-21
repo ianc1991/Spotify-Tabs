@@ -35,8 +35,9 @@ const TabsView = (props) => {
         setIsLoading(false);
     }
 
-    const sendLink = (link) => {
+    const sendLink = (link, song) => {
         setActiveLink(link)
+        props.sendDemoSongDetails(song)
     }
 
     useEffect(() => {
