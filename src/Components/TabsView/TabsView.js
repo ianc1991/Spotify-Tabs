@@ -22,9 +22,9 @@ const TabsView = (props) => {
             scrapedData.forEach(item => {
                 let counter = 0;
                 Object.values(item).forEach(value => {
-                   if (value.includes('A5Qyw')) return;
-                   if (value.includes('_3f1mJ')) return counter = counter + .5;
-                   if (value.includes('_1foT2')) return counter = counter + 1;
+                  if (value.includes('H3fQr')) return; // H3fQr is empty star FIND ME IF BROKEN
+                  if (value.includes('RCXwf')) return counter = counter + .5; // RCXwf is .5 star FIND ME IF BROKEN
+                  if (value.includes('kd3Q7')) return counter = counter + 1; // kd3Q7 is 1 star FIND ME IF BROKEN
                 })
                 item.rank = counter;
             });

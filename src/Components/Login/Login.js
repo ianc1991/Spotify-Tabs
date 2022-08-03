@@ -12,6 +12,7 @@ const Login = () => {
         <p> to log into Spotify and begin. Make Jimi proud!</p>
         <br></br>
         <p>The above link will open Spotify's own login service. Your Spotify password is never seen by this app. Only details that are made visible through the Spotify API are used. Some default links are provided to demo the app if you do not wish to sign in through Spotify.</p>
+        <p>Since this app uses a web scraper to pull some data from Ultimate Guitar, things are likely to break every so often due to UG changing the names of their div class names. Let me know if there are any issues!</p>
         <p>SPOTIFY DOES NOT ALLOW QUOTA EXTENSIONS / PUBLIC ACCESS FOR HOBBY PROJECTS. PLEASE MESSAGE ME YOUR EMAIL ADDRESS IF YOU WOULD LIKE TO TRY THE APP, AND I WILL ADD YOU TO THE AUTHORIZED USERS LIST.</p>
     </div>
   )
