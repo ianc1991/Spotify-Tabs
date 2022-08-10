@@ -4,21 +4,16 @@ import tabData from '../../Services/tabData';
 //Componenets
 import { Loading } from '../Loading/Loading';
 import Login from '../../Components/Login/Login';
-// Service
-import data from '../../Services/data';
+//Context
+import useAuthContext from '../../Context/useAuthContext';
 
 const TabPage = (props) => {
     const [tabText, setTabText] = useState("");
     const [isLoadingTab, setIsLoadingTab] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(undefined);
-    
-    const isInitialMount = useRef(true);
 
-    const checkLogin = async() => {
-      const userData = await data.getUserData();
-      if (userData.data.status === 401) setLoggedIn(false);
-      if (userData.data.statusCode === 200) setLoggedIn(true);
-    }
+    const { loggedIn } = useAuthContext();
+
+    const isInitialMount = useRef(true);
 
     const getUgTab = async() => {
       try {
@@ -31,7 +26,7 @@ const TabPage = (props) => {
       }
       setIsLoadingTab(false);
     }
-    
+
     useEffect(() => {
       if (isInitialMount.current) {
         isInitialMount.current = false;
@@ -40,9 +35,9 @@ const TabPage = (props) => {
       }
     }, [props.link])
 
-    useEffect(() => {
-      checkLogin();
-    })
+    if (loggedIn === undefined) return (
+        <Loading />
+    )
 
     if (loggedIn === false && tabText === "" && isLoadingTab === false) return (
       <div>
@@ -53,7 +48,7 @@ const TabPage = (props) => {
   return (
     <div className='tabOuterContainer'>
       <div className='tabInnerContainer'>
-        {isLoadingTab ? 
+        {isLoadingTab ?
         (
           <Loading />
         )
@@ -64,7 +59,6 @@ const TabPage = (props) => {
         }
       </div>
     </div>
-    
   )
 }
 

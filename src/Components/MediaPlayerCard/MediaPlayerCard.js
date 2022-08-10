@@ -13,23 +13,23 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import CachedIcon from '@mui/icons-material/Cached';
 import ReplayIcon from '@mui/icons-material/Replay';
 // React
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 // Service
 import data from '../../Services/data';
 //Components
 import TabsView from '../TabsView/TabsView.js';
-import Login from '../../Components/Login/Login';
-import { Loading } from '../Loading/Loading';
 
 export default function MediaControlCard() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [songDetails, setSongDetails] = useState({ 
-    name: "Play a song on Spotify to begin", 
-    artist: "Click the refresh button to sync with Spotify", 
-    albumCover: "https://cdn.usbrandcolors.com/images/logos/spotify-logo.svg", 
-    imgColorPrimary: "#1DB954", 
+  const [songDetails, setSongDetails] = useState({
+    name: "Play a song on Spotify to begin",
+    artist: "Click the refresh button to sync with Spotify",
+    albumCover: "https://cdn.usbrandcolors.com/images/logos/spotify-logo.svg",
+    imgColorPrimary: "#1DB954",
     imgColorSecondary: "#191414"
   });
+
+  const isInitialMount = useRef(true);
 
   const sendDemoSongDetails = (song) => {
     if (song === 'RHCP') {
@@ -37,7 +37,7 @@ export default function MediaControlCard() {
         name: "Under The Bridge",
         artist: "Red Hot Chili Peppers",
         albumCover: "https://upload.wikimedia.org/wikipedia/en/4/41/UndertheBridge.jpg",
-        imgColorPrimary: "#f0f0f0", 
+        imgColorPrimary: "#f0f0f0",
         imgColorSecondary: "#110e0f"
       })
     }
@@ -46,7 +46,7 @@ export default function MediaControlCard() {
         name: "Black Star",
         artist: "Radiohead",
         albumCover: "https://upload.wikimedia.org/wikipedia/en/thumb/5/55/Radioheadthebends.png/220px-Radioheadthebends.png",
-        imgColorPrimary: "#030201", 
+        imgColorPrimary: "#030201",
         imgColorSecondary: "#f6c7a0"
       })
     }
@@ -55,12 +55,12 @@ export default function MediaControlCard() {
         name: "Yesterday",
         artist: "Beatles",
         albumCover: "https://upload.wikimedia.org/wikipedia/en/thumb/e/e7/Help%21_%28The_Beatles_album_-_cover_art%29.jpg/220px-Help%21_%28The_Beatles_album_-_cover_art%29.jpg",
-        imgColorPrimary: "#fefefe", 
+        imgColorPrimary: "#fefefe",
         imgColorSecondary: "#083f6b"
       })
     }
   }
-  
+
   const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
     const hex = x.toString(16)
     return hex.length === 1 ? '0' + hex : hex
@@ -120,7 +120,11 @@ export default function MediaControlCard() {
   }
 
   useEffect(() => {
-    getSongDetails();
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      getSongDetails();
+    }
   }, []);
 
   // format the strings to pass as props
@@ -132,13 +136,13 @@ export default function MediaControlCard() {
 
   return (
       <div>
-        <Card sx={{ height: 140, 
-                    display: 'flex', 
-                    textAlign: 'center', 
-                    alignItems: 'center', 
-                    justifyContent: 'center', 
-                    position: 'sticky', 
-                    top: 0, 
+        <Card sx={{ height: 140,
+                    display: 'flex',
+                    textAlign: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'sticky',
+                    top: 0,
                     background: 'linear-gradient(to right bottom,' + background + ', ' + backgroundSecondary + ')',
                     backdropFilter: 'blur(5px)'
                     }}>

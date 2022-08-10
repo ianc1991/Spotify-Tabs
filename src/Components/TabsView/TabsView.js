@@ -6,7 +6,6 @@ import tabData from '../../Services/tabData';
 // Components
 import TabPage from '../TabPage/TabPage';
 import TabList from '../TabList/TabList';
-import { Loading } from '../Loading/Loading';
 
 const TabsView = (props) => {
 

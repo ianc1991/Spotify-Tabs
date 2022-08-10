@@ -8,16 +8,20 @@ function AuthContextProvider(props) {
 
     async function getLoggedIn() {
 
-        const loggedInRes = await data.checkSpotifyLogin();
+        const loggedInRes = await data.getUserData();
 
-        // data is the axios response body. returns true/false
-        setLoggedIn(loggedInRes)
+        // data is the axios response body. returns 401 if not logged in.
+        if (loggedInRes.data.status === 401) {
+          setLoggedIn(false)
+        } else {
+          setLoggedIn(true)
+        }
     }
 
     useEffect(() => {
         getLoggedIn();
     }, []);
-    
+
     // Any componenets in the AuthContext.Provider will be passed the value={}
     return (
         <AuthContext.Provider value={{loggedIn, getLoggedIn}}>

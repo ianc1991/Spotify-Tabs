@@ -41,7 +41,6 @@ const TabList = (props) => {
 
   const [tabType, setTabType] = useState("chords");
   const [isChecked, setIsChecked] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);   
 
   const handleSetTabType = (e) => {
     setTabType(e.target.value)
@@ -105,14 +104,14 @@ const TabList = (props) => {
           </Box>
         </div>
         <ul className='tabListUlContainer'>
-          {props.isLoading && 
+          {props.isLoading &&
           (
             <div className="loadingTabList">
               <Loading />
             </div>
           )}
           { props.ugScrapedData.length > 0 ?
-              props.ugScrapedData.map((data)=> 
+              props.ugScrapedData.map((data)=>
                 tabType === data.type &&
                   (
                       <li className='tabListLiContainer' key={data.link}>
