@@ -36,7 +36,9 @@ const TabPage = (props) => {
     }, [props.link])
 
     if (loggedIn === undefined) return (
-        <Loading />
+        <div className='initialLoading'>
+          <Loading />
+        </div>
     )
 
     if (loggedIn === false && tabText === "" && isLoadingTab === false) return (
